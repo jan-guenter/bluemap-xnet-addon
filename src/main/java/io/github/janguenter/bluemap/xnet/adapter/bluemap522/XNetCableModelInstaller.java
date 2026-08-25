@@ -5,6 +5,7 @@
 package io.github.janguenter.bluemap.xnet.adapter.bluemap522;
 
 import com.flowpowered.math.vector.Vector3f;
+import de.bluecolored.bluemap.core.map.hires.block.BlockRendererType;
 import de.bluecolored.bluemap.core.resources.ResourcePath;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePack;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.BlockState;
@@ -12,6 +13,7 @@ import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.BlockS
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.Multipart;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.Variant;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.VariantSet;
+import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.Variants;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.model.Element;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.model.Face;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.model.Model;
@@ -36,6 +38,9 @@ final class XNetCableModelInstaller {
     private static final Key NETCABLE = Key.parse("xnet:netcable");
     private static final Key CONNECTOR = Key.parse("xnet:connector");
     private static final Key ADVANCED_CONNECTOR = Key.parse("xnet:advanced_connector");
+    private static final Key FACADE = Key.parse("xnet:facade");
+    private static final Key FACADE_MODEL = Key.parse("bluemap_xnet:block/facade_fallback");
+    private static final Key FACADE_TEXTURE = texture("facade");
 
     private XNetCableModelInstaller() {
     }
@@ -65,6 +70,22 @@ final class XNetCableModelInstaller {
         pack.getBlockStates().put(NETCABLE, cableState("normal"));
         pack.getBlockStates().put(CONNECTOR, cableState("normal"));
         pack.getBlockStates().put(ADVANCED_CONNECTOR, cableState("advanced"));
+        putModel(pack, FACADE_MODEL, box(0F, 0F, 0F, 16F, 16F, 16F, FACADE_TEXTURE));
+        pack.getBlockStates().put(FACADE, singleVariant(FACADE_MODEL));
+        return true;
+    }
+
+    static boolean routeFacade(ResourcePack pack, BlockRendererType renderer) {
+        BlockState state = pack.getBlockStates().get(FACADE);
+        if (state == null || state.getMultipart() != null || state.getVariants() == null) {
+            return false;
+        }
+        List<Variant> variants = new ArrayList<>();
+        state.forEach(variants::add);
+        if (variants.size() != 1 || !FACADE_MODEL.equals(variants.getFirst().getModel())) {
+            return false;
+        }
+        variants.getFirst().setRenderer(renderer);
         return true;
     }
 
@@ -75,13 +96,22 @@ final class XNetCableModelInstaller {
             textures.add(texture("cable" + color + "/connector"));
             textures.add(texture("cable" + color + "/advanced_connector"));
         }
+        textures.add(FACADE_TEXTURE);
         return Set.copyOf(textures);
     }
 
     private static boolean hasRequiredInputs(ResourcePack pack) {
         return pack.getBlockStates().get(NETCABLE) != null
                 && pack.getBlockStates().get(CONNECTOR) != null
-                && pack.getBlockStates().get(ADVANCED_CONNECTOR) != null;
+                && pack.getBlockStates().get(ADVANCED_CONNECTOR) != null
+                && pack.getBlockStates().get(FACADE) != null;
+    }
+
+    private static BlockState singleVariant(Key model) {
+        return new BlockState(new Variants(
+                new VariantSet[0],
+                new VariantSet(new Variant(new ResourcePath<Model>(model)))
+        ));
     }
 
     private static BlockState cableState(String endpointKind) {

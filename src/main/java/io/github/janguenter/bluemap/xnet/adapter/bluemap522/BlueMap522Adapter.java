@@ -10,6 +10,7 @@ import de.bluecolored.bluemap.core.map.hires.block.BlockRenderer;
 import de.bluecolored.bluemap.core.map.hires.block.BlockRendererType;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePack;
 import de.bluecolored.bluemap.core.util.Key;
+import de.bluecolored.bluemap.core.world.mca.blockentity.BlockEntityType;
 import io.github.janguenter.bluemap.xnet.activation.AddonRuntime;
 
 /** BlueMap 5.22 registration boundary. Family renderer registrations go here. */
@@ -21,6 +22,9 @@ public final class BlueMap522Adapter {
     );
     private static final ResourcePack.Extension<ProfileResourceExtension> EXTENSION =
             new ProfileResourceExtensionType(RENDERER, RUNTIME);
+    private static final BlockEntityType FACADE = new BlockEntityType.Impl(
+            Key.parse("xnet:facade"), XNetFacadeBlockEntityData.class
+    );
 
     private BlueMap522Adapter() {
     }
@@ -28,12 +32,14 @@ public final class BlueMap522Adapter {
     /** Registers only the safe exact-profile probe in the generated seed. */
     public static synchronized boolean install() {
         if (!RegistryGuard.canRegister(BlockRendererType.REGISTRY, RENDERER)
-                || !RegistryGuard.canRegister(ResourcePack.Extension.REGISTRY, EXTENSION)) {
+                || !RegistryGuard.canRegister(ResourcePack.Extension.REGISTRY, EXTENSION)
+                || !RegistryGuard.canRegister(BlockEntityType.REGISTRY, FACADE)) {
             RUNTIME.fail("registry-collision");
             return false;
         }
         if (!RegistryGuard.register(BlockRendererType.REGISTRY, RENDERER)
-                || !RegistryGuard.register(ResourcePack.Extension.REGISTRY, EXTENSION)) {
+                || !RegistryGuard.register(ResourcePack.Extension.REGISTRY, EXTENSION)
+                || !RegistryGuard.register(BlockEntityType.REGISTRY, FACADE)) {
             RUNTIME.fail("registry-registration-failed");
             return false;
         }

@@ -22,9 +22,11 @@ import org.junit.jupiter.api.Test;
 class XNetCableModelInstallerTest {
 
     @Test
-    void installsThreeBoundedMultipartStatesBeforeBlueMapLoadsTextures() {
+    void installsBoundedCableAndFacadeStatesBeforeBlueMapLoadsTextures() {
         ResourcePack pack = new ResourcePack(new PackVersion(34, 0));
-        for (String id : new String[]{"netcable", "connector", "advanced_connector"}) {
+        for (String id : new String[]{
+                "netcable", "connector", "advanced_connector", "facade"
+        }) {
             pack.getBlockStates().put(
                     Key.parse("xnet:" + id),
                     new BlockState(new Variants(
@@ -34,13 +36,18 @@ class XNetCableModelInstallerTest {
             );
         }
         assertTrue(XNetCableModelInstaller.install(pack));
-        assertEquals(95, pack.getModels().keySet().size());
-        assertEquals(15, XNetCableModelInstaller.requiredTextureKeys().size());
+        assertEquals(96, pack.getModels().keySet().size());
+        assertEquals(16, XNetCableModelInstaller.requiredTextureKeys().size());
         for (String id : new String[]{"netcable", "connector", "advanced_connector"}) {
             BlockState state = pack.getBlockStates().get(Key.parse("xnet:" + id));
             assertNotNull(state.getMultipart());
             assertEquals(65, state.getMultipart().getParts().length);
         }
+        assertTrue(XNetCableModelInstaller.routeFacade(
+                pack, de.bluecolored.bluemap.core.map.hires.block.BlockRendererType.DEFAULT
+        ));
+        BlockState facade = pack.getBlockStates().get(Key.parse("xnet:facade"));
+        assertNotNull(facade.getVariants());
     }
 
     @Test

@@ -8,6 +8,8 @@ import de.bluecolored.bluemap.core.map.hires.block.BlockRendererType;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePack;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePackExtension;
 import de.bluecolored.bluemap.core.util.Key;
+import de.bluecolored.bluemap.core.world.BlockProperties;
+import de.bluecolored.bluemap.core.world.BlockState;
 import io.github.janguenter.bluemap.xnet.activation.AddonRuntime;
 import io.github.janguenter.bluemap.xnet.profile.ExactArtifactDetector;
 import io.github.janguenter.bluemap.xnet.profile.XNet707Profile;
@@ -18,8 +20,10 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-/** Exact-artifact admission hook for XNet's custom cable-model loader. */
+/** Exact-artifact admission hook for XNet's unsupported model loaders and facade data. */
 final class ProfileResourceExtension implements ResourcePackExtension {
+
+    private static final String FACADE = "xnet:facade";
 
     private final ResourcePack resourcePack;
     private final BlockRendererType renderer;
@@ -82,12 +86,20 @@ final class ProfileResourceExtension implements ResourcePackExtension {
         if (!runtime.active()) {
             return;
         }
-        if (!XNetAntennaModelInstaller.install(resourcePack, renderer)) {
-            runtime.inactive("antenna-blockstate-contract-changed");
+        if (!XNetCableModelInstaller.routeFacade(resourcePack, renderer)
+                || !XNetAntennaModelInstaller.install(resourcePack, renderer)) {
+            runtime.inactive("custom-blockstate-contract-changed");
             return;
         }
         XNetAntennaRuntime.put(resourcePack, antennaModels);
-        System.out.println("BlueMap XNet add-on active: installed cable multipart models and "
+        System.out.println("BlueMap XNet add-on active: installed cable and facade models plus "
                 + antennaModels.size() + " exact OBJ antenna models.");
+    }
+
+    @Override
+    public void getBlockProperties(BlockState state, BlockProperties.Builder builder) {
+        if (runtime.active() && FACADE.equals(state.getId().getFormatted())) {
+            builder.culling(false).occluding(false).cullingIdentical(false);
+        }
     }
 }
