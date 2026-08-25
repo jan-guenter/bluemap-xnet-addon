@@ -12,7 +12,7 @@ import io.github.janguenter.bluemap.xnet.profile.XNet707Profile;
 
 import java.nio.file.Path;
 
-/** Exact-artifact admission hook; family routing deliberately remains stock. */
+/** Exact-artifact admission hook for XNet's custom cable-model loader. */
 final class ProfileResourceExtension implements ResourcePackExtension {
 
     private final ResourcePack resourcePack;
@@ -34,12 +34,10 @@ final class ProfileResourceExtension implements ResourcePackExtension {
             return;
         }
 
-        // SCAFFOLD_NOT_IMPLEMENTED: validate installed resources, register the
-        // family renderer, route only owned hosts, then call runtime.activate().
-        if (resourcePack.getBlockStates() == null) {
-            runtime.fail("resource-pack-unavailable");
+        if (!XNetCableModelInstaller.install(resourcePack)) {
+            runtime.inactive("required-installed-resource-missing");
             return;
         }
-        runtime.inactive("family-renderer-not-implemented");
+        runtime.activate();
     }
 }

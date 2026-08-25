@@ -3,11 +3,9 @@
 A Java 21 BlueMap add-on for the exact `xnet-1.21-7.0.7` profile in All the Mons
 `1.2.0` / Minecraft `1.21.1`.
 
-Status: safe generated prototype. The exact artifact gate and BlueMap 5.22
-adapter compile, but the family-owned renderer is intentionally absent.
-BlueMap therefore retains stock rendering until the explicit
-`SCAFFOLD_NOT_IMPLEMENTED` markers are replaced. A release cannot pass while
-those markers remain.
+Status: first rendering prototype. After exact artifact admission, it replaces
+XNet's unsupported cable-model loader for net cables and both connector types
+with static multipart models built from the installed XNet textures.
 
 ## Build
 
@@ -30,10 +28,10 @@ Set `-Dbluemap.xnet.disabled=true` to leave the exact profile inactive.
 
 ## Scope boundary
 
-The initial implementation must be limited to a small observed BlueMap defect.
-Live contents, fill levels, activity overlays, particles, animation phase, and
-unsupported states stay stock or deterministic-neutral unless the owner
-explicitly expands scope.
+The first pass covers five cable colors, six connection directions, and the
+`none`, `cable`, and `block` connection states. Facade mimic state and OBJ
+antenna models remain stock in this prototype. Live contents, activity
+overlays, particles, animation phase, and unsupported states remain stock.
 
 No XNet binary, source, class, asset, captured mesh, or gallery is
 bundled in the add-on.
