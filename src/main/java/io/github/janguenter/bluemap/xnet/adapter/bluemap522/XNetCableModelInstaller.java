@@ -22,9 +22,11 @@ import de.bluecolored.bluemap.core.util.Key;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 /** Installs static multipart models for the exact XNet cable state properties. */
 final class XNetCableModelInstaller {
@@ -64,6 +66,16 @@ final class XNetCableModelInstaller {
         pack.getBlockStates().put(CONNECTOR, cableState("normal"));
         pack.getBlockStates().put(ADVANCED_CONNECTOR, cableState("advanced"));
         return true;
+    }
+
+    static Set<Key> requiredTextureKeys() {
+        var textures = new HashSet<Key>();
+        for (int color = 0; color < COLORS.length; color++) {
+            textures.add(texture("cable" + color + "/normal_netcable"));
+            textures.add(texture("cable" + color + "/connector"));
+            textures.add(texture("cable" + color + "/advanced_connector"));
+        }
+        return Set.copyOf(textures);
     }
 
     private static boolean hasRequiredInputs(ResourcePack pack) {

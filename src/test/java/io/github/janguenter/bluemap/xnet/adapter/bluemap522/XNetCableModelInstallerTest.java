@@ -35,6 +35,7 @@ class XNetCableModelInstallerTest {
         }
         assertTrue(XNetCableModelInstaller.install(pack));
         assertEquals(95, pack.getModels().keySet().size());
+        assertEquals(15, XNetCableModelInstaller.requiredTextureKeys().size());
         for (String id : new String[]{"netcable", "connector", "advanced_connector"}) {
             BlockState state = pack.getBlockStates().get(Key.parse("xnet:" + id));
             assertNotNull(state.getMultipart());
