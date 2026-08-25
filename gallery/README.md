@@ -1,11 +1,10 @@
-# Placeholder gallery
+# XNet visual gallery
 
-This generated gallery proves only the deterministic data-pack mechanics and a
-single `minecraft:stone` stock control at `(176, 100, 175)`. It does not claim
-XNet support.
+This generated gallery places 21 bounded XNet cases plus one stock control. It
+covers cable colors and topologies, both connector tiers, persisted brick and
+oak-log facades, ordinary machine states, and every supported antenna family.
 
-Replace `cases.py` with the smallest real defect fixture and stock controls,
-then keep the stable commands:
+Keep the generated files synchronized with `cases.py` using these commands:
 
 ```bash
 python gallery/generate.py
@@ -14,6 +13,5 @@ python gallery/lint.py
 bash gallery/package.sh /tmp/xnet-gallery.zip
 ```
 
-The release gate rejects the `SCAFFOLD_NOT_IMPLEMENTED` marker in `cases.py`.
-Keep gallery generation deterministic, bounded, synthetic where practical, and
-free of candidate assets or captured meshes.
+Keep gallery generation deterministic, bounded, synthetic where practical,
+and free of candidate assets or captured meshes.
