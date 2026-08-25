@@ -1,0 +1,6 @@
+{
+  "id": "bluemap-xnet",
+  "entrypoint": "io.github.janguenter.bluemap.xnet.BlueMapXNetAddon",
+  "dependencies": [],
+  "soft-dependencies": []
+}

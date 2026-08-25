@@ -1,0 +1,53 @@
+{
+  "artifacts": [
+    {
+      "curseforge_file": 8256226,
+      "curseforge_project": 260912,
+      "download_url": "https://www.curseforge.com/api/v1/mods/260912/files/8256226/download",
+      "evidence": "All the Mons 1.2.0 manifest and runtime inventory pin CurseForge 260912/8256226; the retained runtime JAR is byte-identical to that official download",
+      "evidence_tier": "T2_ARTIFACT_EXACT",
+      "file_name": "xnet-1.21-7.0.7.jar",
+      "key": "xnet",
+      "license": "MIT",
+      "mod_id": "xnet",
+      "redistributed": false,
+      "sha1": "3ee807801ee484ee06d53d0bdb9ed85a6f10abf5",
+      "sha256": "0f393a4bff91a90e0665ec6d66ff649e45f9c33311dc038e4a5df0b154ea9d80",
+      "size": 611577,
+      "version": "1.21-7.0.7"
+    },
+    {
+      "curseforge_file": 8256204,
+      "curseforge_project": 326041,
+      "download_url": "https://www.curseforge.com/api/v1/mods/326041/files/8256204/download",
+      "evidence": "All the Mons 1.2.0 manifest and runtime inventory pin CurseForge 326041/8256204; XNet machine models reference its installed textures",
+      "evidence_tier": "T2_ARTIFACT_EXACT",
+      "file_name": "rftoolsbase-1.21-6.0.11.jar",
+      "key": "rftoolsbase",
+      "license": "MIT",
+      "mod_id": "rftoolsbase",
+      "redistributed": false,
+      "sha1": "9614bdc12d6c633801b254a983d30dd4cbeb5aee",
+      "sha256": "5195ba530e6cf9ba61c9954a3297679e6d29aa1b6182e27ae14ea43463dd4b00",
+      "size": 463973,
+      "version": "1.21-6.0.11"
+    }
+  ],
+  "bluemap": {
+    "api_commit": "285c9a60eff3ac2b0cab308ce1058d1565be0971",
+    "commit": "9be321df995a1103808621d529eb72773e719d4d",
+    "license": "MIT",
+    "redistributed": false,
+    "version": "5.22-agent.backport-5.22-mc1.21.1-2"
+  },
+  "pack": {
+    "commit": "c7bb230f21d14d26859d0b92548f089b3a493ad9",
+    "minecraft": "1.21.1",
+    "name": "All the Mons",
+    "neoforge": "21.1.248",
+    "version": "1.2.0"
+  },
+  "profile": "xnet-1.21-7.0.7",
+  "schema": 1,
+  "source_use": "Runtime interfaces and installed resources may be interpreted only after family-specific evidence is recorded; no candidate classes, assets, binaries, source, or captured meshes are packaged."
+}
