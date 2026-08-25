@@ -15,17 +15,14 @@ import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.BlockS
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.Variant;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.VariantSet;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.Variants;
-import de.bluecolored.bluemap.core.resources.pack.resourcepack.texture.Texture;
 import de.bluecolored.bluemap.core.util.Key;
-
-import java.awt.image.BufferedImage;
 
 import org.junit.jupiter.api.Test;
 
 class XNetCableModelInstallerTest {
 
     @Test
-    void installsThreeBoundedMultipartStatesFromExactTextures() throws Exception {
+    void installsThreeBoundedMultipartStatesBeforeBlueMapLoadsTextures() {
         ResourcePack pack = new ResourcePack(new PackVersion(34, 0));
         for (String id : new String[]{"netcable", "connector", "advanced_connector"}) {
             pack.getBlockStates().put(
@@ -36,12 +33,6 @@ class XNetCableModelInstallerTest {
                     ))
             );
         }
-        for (int color = 0; color < 5; color++) {
-            putTexture(pack, "xnet:block/cable" + color + "/normal_netcable");
-            putTexture(pack, "xnet:block/cable" + color + "/connector");
-            putTexture(pack, "xnet:block/cable" + color + "/advanced_connector");
-        }
-
         assertTrue(XNetCableModelInstaller.install(pack));
         assertEquals(95, pack.getModels().keySet().size());
         for (String id : new String[]{"netcable", "connector", "advanced_connector"}) {
@@ -52,17 +43,10 @@ class XNetCableModelInstallerTest {
     }
 
     @Test
-    void missingInstalledTextureKeepsStockState() {
+    void missingInstalledBlockStateKeepsStockState() {
         ResourcePack pack = new ResourcePack(new PackVersion(34, 0));
         assertFalse(XNetCableModelInstaller.install(pack));
         assertEquals(0, pack.getModels().keySet().size());
     }
 
-    private static void putTexture(ResourcePack pack, String id) throws Exception {
-        Key key = Key.parse(id);
-        pack.getTextures().put(
-                key,
-                Texture.from(key, new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB))
-        );
-    }
 }

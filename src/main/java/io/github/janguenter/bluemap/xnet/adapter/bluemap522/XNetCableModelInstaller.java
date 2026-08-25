@@ -67,21 +67,9 @@ final class XNetCableModelInstaller {
     }
 
     private static boolean hasRequiredInputs(ResourcePack pack) {
-        if (pack.getBlockStates().get(NETCABLE) == null
-                || pack.getBlockStates().get(CONNECTOR) == null
-                || pack.getBlockStates().get(ADVANCED_CONNECTOR) == null) {
-            return false;
-        }
-        for (int color = 0; color < COLORS.length; color++) {
-            if (!pack.getTextures().containsKey(texture("cable" + color + "/normal_netcable"))
-                    || !pack.getTextures().containsKey(texture("cable" + color + "/connector"))
-                    || !pack.getTextures().containsKey(
-                            texture("cable" + color + "/advanced_connector")
-                    )) {
-                return false;
-            }
-        }
-        return true;
+        return pack.getBlockStates().get(NETCABLE) != null
+                && pack.getBlockStates().get(CONNECTOR) != null
+                && pack.getBlockStates().get(ADVANCED_CONNECTOR) != null;
     }
 
     private static BlockState cableState(String endpointKind) {
