@@ -8,8 +8,8 @@ cable-blue-vertical	blue network cable, vertical straight	191	100	175	xnet:netca
 cable-red-block-ended	red network cable, cable arm and block end	194	100	175	xnet:netcable[color=red,north=none,south=none,east=block,west=cable,up=none,down=none,waterlogged=false]	xnet-cable-block-ended
 connector-normal	normal green connector with block end	176	100	178	xnet:connector[color=green,north=block,south=cable,east=none,west=none,up=none,down=none,waterlogged=false]	xnet-normal-connector
 connector-advanced	advanced yellow connector with block end	179	100	178	xnet:advanced_connector[color=yellow,north=none,south=none,east=cable,west=block,up=none,down=none,waterlogged=false]	xnet-advanced-connector
-facade-bricks	blue facade mimicking bricks	182	100	178	xnet:facade[color=blue,north=cable,south=cable,east=none,west=none,up=none,down=none,waterlogged=false]{mimic:{Name:"minecraft:bricks"}}	xnet-facade-bricks
-facade-oak-log-x	routing facade mimicking an east-west oak log	185	100	178	xnet:facade[color=routing,north=none,south=none,east=cable,west=cable,up=none,down=none,waterlogged=false]{mimic:{Name:"minecraft:oak_log",Properties:{axis:"x"}}}	xnet-facade-oak-log-x
+facade-bricks	blue facade mimicking bricks	182	100	178	xnet:facade[color=blue,north=cable,south=cable,east=none,west=none,up=none,down=none,waterlogged=false]{"neoforge:attachments":{"xnet:mimic_data":{state:{Name:"minecraft:bricks"}}}}	xnet-facade-bricks
+facade-oak-log-x	routing facade mimicking an east-west oak log	185	100	178	xnet:facade[color=routing,north=none,south=none,east=cable,west=cable,up=none,down=none,waterlogged=false]{"neoforge:attachments":{"xnet:mimic_data":{state:{Name:"minecraft:oak_log",Properties:{axis:"x"}}}}}	xnet-facade-oak-log-x
 controller-error-north	controller error face north	188	100	178	xnet:controller[error=true,facing=north]	xnet-error-machine-visible
 router-normal-east	router normal face east	191	100	178	xnet:router[error=false,facing=east]	xnet-static-visible
 wireless-router-normal-west	wireless router normal face west	194	100	178	xnet:wireless_router[error=false,facing=west]	xnet-static-visible

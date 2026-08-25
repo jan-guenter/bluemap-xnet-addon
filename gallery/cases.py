@@ -121,7 +121,8 @@ PLACEMENTS = (
         178,
         "xnet:facade[color=blue,north=cable,south=cable,east=none,west=none,"
         "up=none,down=none,waterlogged=false]"
-        "{mimic:{Name:\"minecraft:bricks\"}}",
+        "{\"neoforge:attachments\":{\"xnet:mimic_data\":"
+        "{state:{Name:\"minecraft:bricks\"}}}}",
         "xnet-facade-bricks",
     ),
     Placement(
@@ -132,7 +133,8 @@ PLACEMENTS = (
         178,
         "xnet:facade[color=routing,north=none,south=none,east=cable,west=cable,"
         "up=none,down=none,waterlogged=false]"
-        "{mimic:{Name:\"minecraft:oak_log\",Properties:{axis:\"x\"}}}",
+        "{\"neoforge:attachments\":{\"xnet:mimic_data\":"
+        "{state:{Name:\"minecraft:oak_log\",Properties:{axis:\"x\"}}}}}",
         "xnet-facade-oak-log-x",
     ),
     Placement(

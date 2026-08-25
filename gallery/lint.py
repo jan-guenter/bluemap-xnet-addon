@@ -137,7 +137,8 @@ def main() -> int:
         if block_id(placement.block_state) == "xnet:facade"
     ]
     if len(facades) != 2 or any(
-        "{mimic:{Name:" not in row.block_state for row in facades
+        '"neoforge:attachments":{"xnet:mimic_data":{state:{Name:'
+        not in row.block_state for row in facades
     ):
         raise ValueError("gallery must contain two persisted facade mimic states")
     if not {"antenna-north", "antenna-south"}.issubset(case_ids):

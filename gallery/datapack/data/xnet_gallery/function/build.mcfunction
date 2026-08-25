@@ -19,9 +19,9 @@ setblock 176 100 178 xnet:connector[color=green,north=block,south=cable,east=non
 # connector-advanced: advanced yellow connector with block end
 setblock 179 100 178 xnet:advanced_connector[color=yellow,north=none,south=none,east=cable,west=block,up=none,down=none,waterlogged=false]
 # facade-bricks: blue facade mimicking bricks
-setblock 182 100 178 xnet:facade[color=blue,north=cable,south=cable,east=none,west=none,up=none,down=none,waterlogged=false]{mimic:{Name:"minecraft:bricks"}}
+setblock 182 100 178 xnet:facade[color=blue,north=cable,south=cable,east=none,west=none,up=none,down=none,waterlogged=false]{"neoforge:attachments":{"xnet:mimic_data":{state:{Name:"minecraft:bricks"}}}}
 # facade-oak-log-x: routing facade mimicking an east-west oak log
-setblock 185 100 178 xnet:facade[color=routing,north=none,south=none,east=cable,west=cable,up=none,down=none,waterlogged=false]{mimic:{Name:"minecraft:oak_log",Properties:{axis:"x"}}}
+setblock 185 100 178 xnet:facade[color=routing,north=none,south=none,east=cable,west=cable,up=none,down=none,waterlogged=false]{"neoforge:attachments":{"xnet:mimic_data":{state:{Name:"minecraft:oak_log",Properties:{axis:"x"}}}}}
 # controller-error-north: controller error face north
 setblock 188 100 178 xnet:controller[error=true,facing=north]
 # router-normal-east: router normal face east
