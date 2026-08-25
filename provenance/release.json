@@ -1,10 +1,82 @@
 {
-  "accepted_staging_entries": null,
-  "final_release_artifacts": null,
-  "note": "Populate only after owner visual acceptance; this file is not packaged.",
-  "owner_accepted_staging": null,
-  "repository": "https://github.com/jan-guenter/bluemap-xnet-addon",
   "schema_version": 1,
-  "status": "prototype-not-owner-accepted",
-  "version": "0.1.0-SNAPSHOT"
+  "status": "owner-accepted-release-candidate",
+  "version": "0.1.0-alpha.1",
+  "release_date": "2026-08-25",
+  "repository": "https://github.com/jan-guenter/bluemap-xnet-addon",
+  "tag": "v0.1.0-alpha.1",
+  "maven_coordinate": "io.github.jan-guenter:bluemap-xnet-addon:0.1.0-alpha.1",
+  "owner_accepted_staging": {
+    "commit": "9cb273227fd931d13798a45fa074efbc8b04b5a4",
+    "tree": "278332fb8d76c559e6bb563d8aa73d1b68f4baae",
+    "production_jar_size": 129890,
+    "production_jar_sha256": "b241135841876769a5f68312fd0858ea954374282adec544d240cba5750e52d9",
+    "accepted_at": "2026-08-25",
+    "visual_acceptance": true,
+    "gallery_archive_size": 3095,
+    "gallery_archive_sha256": "d1d8fd654212d1d24f435fe7f34dd9df69b63677c27527c895879ca0056770f8",
+    "fixtures": 22
+  },
+  "accepted_staging_entries": {
+    "path": "provenance/accepted-staging-entries.sha256",
+    "entry_count": 40,
+    "sha256": "53f2c3c9772bd6562fd3240e615860f57a32e11b810ba00228e5c74548a7869a"
+  },
+  "final_release_artifacts": {
+    "production_jar": {
+      "file_name": "bluemap-xnet-addon-0.1.0-alpha.1.jar",
+      "size": 129889,
+      "sha256": "bd08f4e4d0c7e88e7dbe15863e7f6669bd4c6c2cb495bfdbff43af2d35e49bb4"
+    },
+    "sources_jar": {
+      "file_name": "bluemap-xnet-addon-0.1.0-alpha.1-sources.jar",
+      "size": 77515,
+      "sha256": "85974eb7e762ae30bb206559366a6484253c4b42eb38a0eb66fa75f0a91486c3"
+    },
+    "pom": {
+      "file_name": "bluemap-xnet-addon-0.1.0-alpha.1.pom",
+      "size": 1299,
+      "sha256": "1b8bb96191f58dadff61af20cbc5ded6584182428fc4a3a3cf2ea097d70339ea"
+    },
+    "gradle_module": {
+      "file_name": "bluemap-xnet-addon-0.1.0-alpha.1.module.json",
+      "size": 2798,
+      "sha256": "44fc26b47e40ecf2fe4d6810dcd7610abb3244410dc8cc2c719857f0578603f5"
+    }
+  },
+  "staged_equivalence": {
+    "entry_manifest": "provenance/accepted-staging-entries.sha256",
+    "identical_non_manifest_entries": 40,
+    "whole_jar_byte_identical": false,
+    "only_changed_entry_bytes": "META-INF/MANIFEST.MF",
+    "change_reason": "Implementation-Version changed from the accepted SNAPSHOT marker to the final release version."
+  },
+  "gallery": {
+    "archive_file_name": "bluemap-xnet-gallery.zip",
+    "size": 3095,
+    "sha256": "d1d8fd654212d1d24f435fe7f34dd9df69b63677c27527c895879ca0056770f8",
+    "fixtures": 22,
+    "published_as_release_asset": false
+  },
+  "ephemeral_ci_inputs": {
+    "xnet": {
+      "curseforge_project": 260912,
+      "curseforge_file": 8256226,
+      "size": 611577,
+      "sha256": "0f393a4bff91a90e0665ec6d66ff649e45f9c33311dc038e4a5df0b154ea9d80"
+    },
+    "rftoolsbase": {
+      "curseforge_project": 326041,
+      "curseforge_file": 8256204,
+      "size": 463973,
+      "sha256": "5195ba530e6cf9ba61c9954a3297679e6d29aa1b6182e27ae14ea43463dd4b00"
+    },
+    "policy": "Downloaded only into the ephemeral runner, verified before use, and never bundled or uploaded."
+  },
+  "verification": {
+    "production_jar_exact_byte_gate": true,
+    "sources_jar_exact_byte_gate": true,
+    "publication_metadata_exact_byte_gate": true,
+    "exact_input_gate": true
+  }
 }

@@ -4,22 +4,40 @@
 
 package io.github.janguenter.bluemap.xnet.adapter.bluemap522;
 
+import de.bluecolored.bluemap.core.map.hires.block.BlockRendererType;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePack;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePackExtension;
+import de.bluecolored.bluemap.core.util.Key;
+import de.bluecolored.bluemap.core.world.BlockProperties;
+import de.bluecolored.bluemap.core.world.BlockState;
 import io.github.janguenter.bluemap.xnet.activation.AddonRuntime;
 import io.github.janguenter.bluemap.xnet.profile.ExactArtifactDetector;
 import io.github.janguenter.bluemap.xnet.profile.XNet707Profile;
 
+import java.io.IOException;
 import java.nio.file.Path;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
-/** Exact-artifact admission hook; family routing deliberately remains stock. */
+/** Exact-artifact admission hook for XNet's unsupported model loaders and facade data. */
 final class ProfileResourceExtension implements ResourcePackExtension {
 
-    private final ResourcePack resourcePack;
-    private final AddonRuntime runtime;
+    private static final String FACADE = "xnet:facade";
 
-    ProfileResourceExtension(ResourcePack resourcePack, AddonRuntime runtime) {
+    private final ResourcePack resourcePack;
+    private final BlockRendererType renderer;
+    private final AddonRuntime runtime;
+    private Map<String, CompiledAntennaModel> antennaModels = Map.of();
+    private Set<Key> usedTextures = Set.of();
+
+    ProfileResourceExtension(
+            ResourcePack resourcePack,
+            BlockRendererType renderer,
+            AddonRuntime runtime
+    ) {
         this.resourcePack = resourcePack;
+        this.renderer = renderer;
         this.runtime = runtime;
     }
 
@@ -29,17 +47,59 @@ final class ProfileResourceExtension implements ResourcePackExtension {
             runtime.inactive("operator-disabled");
             return;
         }
-        if (!ExactArtifactDetector.matchesAll(roots, XNet707Profile.ARTIFACTS)) {
+        Map<String, Path> artifacts = ExactArtifactDetector.matchAll(
+                roots, XNet707Profile.ARTIFACTS
+        );
+        Path xnetJar = artifacts.get("xnet");
+        if (xnetJar == null) {
             runtime.inactive("exact-artifact-missing-or-duplicate");
             return;
         }
 
-        // SCAFFOLD_NOT_IMPLEMENTED: validate installed resources, register the
-        // family renderer, route only owned hosts, then call runtime.activate().
-        if (resourcePack.getBlockStates() == null) {
-            runtime.fail("resource-pack-unavailable");
+        XNetAntennaModels.Catalog antennas;
+        try {
+            antennas = XNetAntennaModels.load(xnetJar);
+        } catch (IOException | RuntimeException exception) {
+            runtime.inactive("antenna-resources-" + exception.getClass().getSimpleName());
             return;
         }
-        runtime.inactive("family-renderer-not-implemented");
+        if (!XNetCableModelInstaller.install(resourcePack)) {
+            runtime.inactive("required-installed-resource-missing");
+            return;
+        }
+        antennaModels = antennas.models();
+        LinkedHashSet<Key> textures = new LinkedHashSet<>(
+                XNetCableModelInstaller.requiredTextureKeys()
+        );
+        textures.addAll(antennas.textures());
+        usedTextures = Set.copyOf(textures);
+        runtime.activate();
+    }
+
+    @Override
+    public Set<Key> collectUsedTextureKeys() {
+        return runtime.active() ? usedTextures : Set.of();
+    }
+
+    @Override
+    public void bake() {
+        if (!runtime.active()) {
+            return;
+        }
+        if (!XNetCableModelInstaller.routeFacade(resourcePack, renderer)
+                || !XNetAntennaModelInstaller.install(resourcePack, renderer)) {
+            runtime.inactive("custom-blockstate-contract-changed");
+            return;
+        }
+        XNetAntennaRuntime.put(resourcePack, antennaModels);
+        System.out.println("BlueMap XNet add-on active: installed cable and facade models plus "
+                + antennaModels.size() + " exact OBJ antenna models.");
+    }
+
+    @Override
+    public void getBlockProperties(BlockState state, BlockProperties.Builder builder) {
+        if (runtime.active() && FACADE.equals(state.getId().getFormatted())) {
+            builder.culling(false).occluding(false).cullingIdentical(false);
+        }
     }
 }

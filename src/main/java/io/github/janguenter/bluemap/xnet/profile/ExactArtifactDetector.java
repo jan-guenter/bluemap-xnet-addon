@@ -15,10 +15,12 @@ import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.HashSet;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -41,23 +43,36 @@ public final class ExactArtifactDetector {
 
     /** Returns true only when every pin has one distinct declaring exact JAR. */
     public static boolean matchesAll(Iterable<Path> roots, List<ArtifactPin> pins) {
+        return !matchAll(roots, pins).isEmpty();
+    }
+
+    /** Returns the exact path for every pin, or an empty map on any ambiguity. */
+    public static Map<String, Path> matchAll(
+            Iterable<Path> roots,
+            List<ArtifactPin> pins
+    ) {
         Objects.requireNonNull(roots, "roots");
         Objects.requireNonNull(pins, "pins");
-        if (pins.isEmpty() || new HashSet<>(pins).size() != pins.size()) {
+        Set<String> keys = new HashSet<>();
+        if (pins.isEmpty()
+                || new HashSet<>(pins).size() != pins.size()
+                || pins.stream().anyMatch(pin -> !keys.add(pin.key()))) {
             throw new IllegalArgumentException("artifact pins must be non-empty and unique");
         }
         List<Path> bounded = boundedRoots(roots);
         if (bounded == null) {
-            return false;
+            return Map.of();
         }
         Set<Path> selected = new HashSet<>();
+        Map<String, Path> matches = new LinkedHashMap<>();
         for (ArtifactPin pin : pins) {
             Path match = findOne(bounded, pin);
             if (match == null || !selected.add(match)) {
-                return false;
+                return Map.of();
             }
+            matches.put(pin.key(), match);
         }
-        return true;
+        return Map.copyOf(matches);
     }
 
     private static List<Path> boundedRoots(Iterable<Path> roots) {
