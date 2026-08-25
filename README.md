@@ -15,7 +15,7 @@ gradle --no-daemon -PbluemapSourcePath=../bluemap-backport clean check build
 ```
 
 `check` is the quick Java/checkstyle/archive gate. `prototypeCheck` additionally
-requires every exact candidate JAR property and validates the placeholder
+requires every exact candidate JAR property and validates the generated
 gallery. See `provenance/upstreams.json` for immutable artifact identities and
 the [execution guide](docs/EXECUTION.md) for the prototype-to-release loop.
 
@@ -32,8 +32,9 @@ Set `-Dbluemap.xnet.disabled=true` to leave the exact profile inactive.
 The implemented pass covers five cable colors, six connection directions, the
 `none`, `cable`, and `block` connection states, persisted facade mimic blocks,
 and all authored rotations of the antenna, antenna base, and antenna dish.
-Live contents, activity overlays, particles, animation phase, and malformed or
-unsupported states remain stock.
+Live contents, activity overlays, particles, and animation phase stay outside
+this pass. Invalid facade mimic data uses the neutral installed facade model;
+an unsupported artifact profile leaves the whole add-on inactive.
 
 No XNet binary, source, class, asset, captured mesh, or gallery is
 bundled in the add-on.
