@@ -5,13 +5,18 @@ and RFTools Base artifacts are present. Keep new work bounded to observed XNet
 rendering defects.
 
 Before running Gradle gates, activate a Python 3.11 or newer virtual
-environment and install the exact development-only toolkit into it:
+environment, initialize the pinned toolkit submodule, and install the exact
+development-only toolkit into the environment:
 
 ```bash
+git submodule update --init --recursive -- tooling/bluemap-addon-toolkit
 python -m pip install --disable-pip-version-check --no-deps \
   --require-hashes --only-binary=:all: \
   --requirement requirements/toolkit.txt
 ```
+
+The requirement locks the 19,827-byte `v0.2.0-alpha.1` wheel at SHA-256
+`cbfbad7ea12ea631b9f36a5261482dde3ca4d8f270df1b5faf75310020b115f9`.
 
 ## Prototype
 
