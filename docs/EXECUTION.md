@@ -13,10 +13,11 @@ git submodule update --init --recursive -- tooling/bluemap-addon-toolkit
 python -m pip install --disable-pip-version-check --no-deps \
   --require-hashes --only-binary=:all: \
   --requirement requirements/toolkit.txt
+bluemap-addon-toolkit conventions check .
 ```
 
-The requirement locks the 19,827-byte `v0.2.0-alpha.1` wheel at SHA-256
-`cbfbad7ea12ea631b9f36a5261482dde3ca4d8f270df1b5faf75310020b115f9`.
+The requirement locks the 20,585-byte `v0.3.0-alpha.1` wheel at SHA-256
+`82f1ec53603646849a7c2d4b58f3fb7000413fe83043a302bee88cc88daeb8f7`.
 
 ## Prototype
 
