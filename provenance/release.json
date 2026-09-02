@@ -33,31 +33,31 @@
   "candidate_artifacts": {
     "production_jar": {
       "file_name": "bluemap-xnet-addon-0.1.0-alpha.2.jar",
-      "size": 0,
-      "sha256": "PENDING"
+      "size": 135017,
+      "sha256": "b6230d7fef2b5b1fa91beaf07cd1fe5fee5c710ddd4ea95d79305977ce0fb226"
     },
     "sources_jar": {
       "file_name": "bluemap-xnet-addon-0.1.0-alpha.2-sources.jar",
-      "size": 0,
-      "sha256": "PENDING"
+      "size": 82549,
+      "sha256": "bea439db20c507173c861d9f59d718ad642912af0e23fc3a699aa0a99786f881"
     },
     "pom": {
       "file_name": "bluemap-xnet-addon-0.1.0-alpha.2.pom",
-      "size": 0,
-      "sha256": "PENDING"
+      "size": 1299,
+      "sha256": "5baf2ac1735126e475d4f99255e1dc1a025aa5532fe7d5f02d41508b73876ac5"
     },
     "gradle_module": {
       "file_name": "bluemap-xnet-addon-0.1.0-alpha.2.module.json",
-      "size": 0,
-      "sha256": "PENDING"
+      "size": 2798,
+      "sha256": "a8a3a92ab1dbe6a5fa344fd8eb76136a18a86fd6e65f408e03187b3bed5de2c2"
     }
   },
   "gallery_candidate": {
     "file_name": "bluemap-xnet-gallery.zip",
-    "size": 0,
-    "sha256": "PENDING",
-    "deterministic_rebuild": false,
-    "matches_alpha_1_owner_accepted_gallery": false
+    "size": 3095,
+    "sha256": "d1d8fd654212d1d24f435fe7f34dd9df69b63677c27527c895879ca0056770f8",
+    "deterministic_rebuild": true,
+    "matches_alpha_1_owner_accepted_gallery": true
   },
   "preserved_contract": {
     "gallery_cases": 22,
@@ -82,8 +82,8 @@
     "policy": "Downloaded only into disposable build or runner storage, verified before use, and never bundled or uploaded."
   },
   "verification": {
-    "local_build": false,
-    "exact_input_gate": false,
+    "local_build": true,
+    "exact_input_gate": true,
     "combined_runtime_review": false,
     "owner_visual_acceptance": false
   }
