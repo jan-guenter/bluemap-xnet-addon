@@ -1,117 +1,84 @@
 {
   "schema_version": 1,
-  "status": "owner-accepted-release-candidate",
-  "version": "0.1.0-alpha.2",
+  "status": "unpublished-migration-candidate",
+  "published": false,
+  "version": "0.1.0-alpha.3",
   "release_date": "2026-09-02",
   "repository": "https://github.com/jan-guenter/bluemap-xnet-addon",
-  "tag": "v0.1.0-alpha.2",
-  "maven_coordinate": "io.github.jan-guenter:bluemap-xnet-addon:0.1.0-alpha.2",
+  "tag": "v0.1.0-alpha.3",
+  "maven_coordinate": "io.github.jan-guenter:bluemap-xnet-addon:0.1.0-alpha.3",
   "bluemap": {
     "version": "5.22-feature.backport-5.23-stateless-java-web-server-46",
     "commit": "7e07f4e74ec1e92a6ead9aa1e66054af3e133aac",
     "api_commit": "285c9a60eff3ac2b0cab308ce1058d1565be0971"
   },
   "adapter_api": {
-    "version": "0.1.0-alpha.2",
-    "commit": "e81f08bc4bfbf02d810ec8949a019130e2e61634",
-    "source_tree": "2f974c9bb2ba13888d69682f86f30f58922d30eb",
-    "source_files_compiled": 4,
+    "version": "0.1.0-alpha.3",
+    "commit": "2f8bb7aa3d907f837ebda45c019e0498ed7e89af",
+    "source_tree": "c0b5db049f6a7630ea589c7f2e658133ed8e2983",
+    "source_files_compiled": 5,
     "module_jar_installed": false,
     "module_jar_bundled": false,
     "module_jar_nested": false,
     "local_adapter_package": "io.github.janguenter.bluemap.xnet.adapter.bluemap523"
   },
-  "baseline_release": {
-    "version": "0.1.0-alpha.1",
-    "tag": "v0.1.0-alpha.1",
-    "commit": "925a5e890e0f97791599c063825bc0ac4fc2bd51",
-    "production_jar_size": 129889,
-    "production_jar_sha256": "bd08f4e4d0c7e88e7dbe15863e7f6669bd4c6c2cb495bfdbff43af2d35e49bb4",
-    "owner_visual_acceptance": "2026-08-25"
-  },
-  "owner_accepted_staging": {
-    "commit": "1448b0fa16ef9570053de604e78d623e9a7f43b1",
-    "tree": "6f3c884cb21ba05e47bff6b781eae17f23c6a990",
+  "previous_owner_accepted_release": {
+    "version": "0.1.0-alpha.2",
+    "tag": "v0.1.0-alpha.2",
+    "commit": "3e650621695aba1aa67b268e91e9c1e1d307ab11",
     "production_jar_size": 135017,
     "production_jar_sha256": "b6230d7fef2b5b1fa91beaf07cd1fe5fee5c710ddd4ea95d79305977ce0fb226",
-    "accepted_at": "2026-09-02",
-    "visual_acceptance": true,
-    "gallery_archive_size": 3095,
-    "gallery_archive_sha256": "d1d8fd654212d1d24f435fe7f34dd9df69b63677c27527c895879ca0056770f8",
-    "fixtures": 22,
-    "combined_integration_composition": "b1af93b9280073770cefba809a44065457e658845c1d8f2051f43432a09890b7",
-    "combined_runtime_report_sha256": "308a321a5ad33b070758e577c24ddef0b1dbeaaec824a000efe49fc195530e59"
+    "owner_visual_acceptance": "2026-09-02"
   },
-  "accepted_staging_entries": {
-    "path": "provenance/accepted-staging-entries.sha256",
-    "entry_count": 42,
-    "sha256": "5ec8b52e79dba0f3cb10f04cba04f2eab2304d923d7e51a5411da61f95b20c88"
-  },
-  "final_release_artifacts": {
+  "candidate_artifacts": {
     "production_jar": {
-      "file_name": "bluemap-xnet-addon-0.1.0-alpha.2.jar",
-      "size": 135017,
-      "sha256": "b6230d7fef2b5b1fa91beaf07cd1fe5fee5c710ddd4ea95d79305977ce0fb226"
+      "file_name": "bluemap-xnet-addon-0.1.0-alpha.3.jar",
+      "size": 0,
+      "sha256": "PENDING"
     },
     "sources_jar": {
-      "file_name": "bluemap-xnet-addon-0.1.0-alpha.2-sources.jar",
-      "size": 82549,
-      "sha256": "bea439db20c507173c861d9f59d718ad642912af0e23fc3a699aa0a99786f881"
+      "file_name": "bluemap-xnet-addon-0.1.0-alpha.3-sources.jar",
+      "size": 0,
+      "sha256": "PENDING"
     },
     "pom": {
-      "file_name": "bluemap-xnet-addon-0.1.0-alpha.2.pom",
-      "size": 1299,
-      "sha256": "5baf2ac1735126e475d4f99255e1dc1a025aa5532fe7d5f02d41508b73876ac5"
+      "file_name": "bluemap-xnet-addon-0.1.0-alpha.3.pom",
+      "size": 0,
+      "sha256": "PENDING"
     },
     "gradle_module": {
-      "file_name": "bluemap-xnet-addon-0.1.0-alpha.2.module.json",
-      "size": 2798,
-      "sha256": "a8a3a92ab1dbe6a5fa344fd8eb76136a18a86fd6e65f408e03187b3bed5de2c2"
+      "file_name": "bluemap-xnet-addon-0.1.0-alpha.3.module.json",
+      "size": 0,
+      "sha256": "PENDING"
     }
-  },
-  "staged_equivalence": {
-    "entry_manifest": "provenance/accepted-staging-entries.sha256",
-    "identical_non_manifest_entries": 42,
-    "whole_jar_byte_identical": true,
-    "only_changed_entry_bytes": "none",
-    "change_reason": "The exact BlueMap 5.23 migration JAR accepted in the combined All the Mons 1.2.0 runtime is the sealed release artifact."
-  },
-  "gallery_candidate": {
-    "file_name": "bluemap-xnet-gallery.zip",
-    "size": 3095,
-    "sha256": "d1d8fd654212d1d24f435fe7f34dd9df69b63677c27527c895879ca0056770f8",
-    "deterministic_rebuild": true,
-    "matches_alpha_1_owner_accepted_gallery": true
   },
   "preserved_contract": {
     "gallery_cases": 22,
     "gallery_sources_changed": false,
     "exact_mod_profile_changed": false,
     "renderer_behavior_changed": false,
-    "stock_fallback_changed": false
+    "stock_fallback_changed": false,
+    "registration_candidate_order_changed": false,
+    "activation_failure_strings_changed": false
   },
   "ephemeral_ci_inputs": {
     "xnet": {
-      "curseforge_project": 260912,
-      "curseforge_file": 8256226,
       "size": 611577,
       "sha256": "0f393a4bff91a90e0665ec6d66ff649e45f9c33311dc038e4a5df0b154ea9d80"
     },
     "rftoolsbase": {
-      "curseforge_project": 326041,
-      "curseforge_file": 8256204,
       "size": 463973,
       "sha256": "5195ba530e6cf9ba61c9954a3297679e6d29aa1b6182e27ae14ea43463dd4b00"
     },
-    "policy": "Downloaded only into disposable build or runner storage, verified before use, and never bundled or uploaded."
+    "policy": "Ephemeral exact inputs are verified before use and never bundled."
   },
   "verification": {
-    "local_build": true,
-    "exact_input_gate": true,
-    "combined_runtime_review": true,
-    "owner_visual_acceptance": true,
-    "fresh_rendered_tiles": 589,
-    "runtime_galleries_passed": 51,
-    "runtime_galleries_failed": 0
+    "exact_input_gate": false,
+    "adapter_api_gitlink_and_source_tree_gate": false,
+    "registration_plan_parity_tests": false,
+    "production_archive_boundary_gate": false,
+    "sources_archive_boundary_gate": false,
+    "gradle_9_6_1_clean_builds_byte_identical": false,
+    "owner_visual_acceptance_for_alpha_3": false
   }
 }
