@@ -9,7 +9,8 @@ environment, initialize the pinned toolkit submodule, and install the exact
 development-only toolkit into the environment:
 
 ```bash
-git submodule update --init --recursive -- tooling/bluemap-addon-toolkit
+git submodule update --init --recursive -- \
+  tooling/bluemap-addon-toolkit modules/bluemap-addon-adapter-api
 python -m pip install --disable-pip-version-check --no-deps \
   --require-hashes --only-binary=:all: \
   --requirement requirements/toolkit.txt
@@ -30,7 +31,7 @@ properties are:
 Then run:
 
 ```bash
-gradle --no-daemon -PbluemapSourcePath=../bluemap-backport \
+gradle --no-daemon -PbluemapSourcePath=/path/to/BlueMap-at-7e07f4e7 \
   <exact-candidate-properties> clean prototypeCheck build
 bash gallery/package.sh /tmp/xnet-gallery.zip
 ```
@@ -60,7 +61,7 @@ Promote `addon_version` through a pull request, remove every scaffold
 implementation marker, and run with all exact candidate properties:
 
 ```bash
-gradle --no-daemon -PbluemapSourcePath=../bluemap-backport \
+gradle --no-daemon -PbluemapSourcePath=/path/to/BlueMap-at-7e07f4e7 \
   <exact-candidate-properties> -PreleaseTag=v<version> \
   clean build generatePomFileForAddonPublication \
   generateMetadataFileForAddonPublication verifyReleaseCandidate
