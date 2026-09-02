@@ -1,7 +1,6 @@
 {
   "schema_version": 1,
-  "status": "unpublished-migration-candidate",
-  "published": false,
+  "status": "owner-accepted-release-candidate",
   "version": "0.1.0-alpha.2",
   "release_date": "2026-09-02",
   "repository": "https://github.com/jan-guenter/bluemap-xnet-addon",
@@ -30,7 +29,25 @@
     "production_jar_sha256": "bd08f4e4d0c7e88e7dbe15863e7f6669bd4c6c2cb495bfdbff43af2d35e49bb4",
     "owner_visual_acceptance": "2026-08-25"
   },
-  "candidate_artifacts": {
+  "owner_accepted_staging": {
+    "commit": "1448b0fa16ef9570053de604e78d623e9a7f43b1",
+    "tree": "6f3c884cb21ba05e47bff6b781eae17f23c6a990",
+    "production_jar_size": 135017,
+    "production_jar_sha256": "b6230d7fef2b5b1fa91beaf07cd1fe5fee5c710ddd4ea95d79305977ce0fb226",
+    "accepted_at": "2026-09-02",
+    "visual_acceptance": true,
+    "gallery_archive_size": 3095,
+    "gallery_archive_sha256": "d1d8fd654212d1d24f435fe7f34dd9df69b63677c27527c895879ca0056770f8",
+    "fixtures": 22,
+    "combined_integration_composition": "b1af93b9280073770cefba809a44065457e658845c1d8f2051f43432a09890b7",
+    "combined_runtime_report_sha256": "308a321a5ad33b070758e577c24ddef0b1dbeaaec824a000efe49fc195530e59"
+  },
+  "accepted_staging_entries": {
+    "path": "provenance/accepted-staging-entries.sha256",
+    "entry_count": 42,
+    "sha256": "5ec8b52e79dba0f3cb10f04cba04f2eab2304d923d7e51a5411da61f95b20c88"
+  },
+  "final_release_artifacts": {
     "production_jar": {
       "file_name": "bluemap-xnet-addon-0.1.0-alpha.2.jar",
       "size": 135017,
@@ -51,6 +68,13 @@
       "size": 2798,
       "sha256": "a8a3a92ab1dbe6a5fa344fd8eb76136a18a86fd6e65f408e03187b3bed5de2c2"
     }
+  },
+  "staged_equivalence": {
+    "entry_manifest": "provenance/accepted-staging-entries.sha256",
+    "identical_non_manifest_entries": 42,
+    "whole_jar_byte_identical": true,
+    "only_changed_entry_bytes": "none",
+    "change_reason": "The exact BlueMap 5.23 migration JAR accepted in the combined All the Mons 1.2.0 runtime is the sealed release artifact."
   },
   "gallery_candidate": {
     "file_name": "bluemap-xnet-gallery.zip",
@@ -84,7 +108,10 @@
   "verification": {
     "local_build": true,
     "exact_input_gate": true,
-    "combined_runtime_review": false,
-    "owner_visual_acceptance": false
+    "combined_runtime_review": true,
+    "owner_visual_acceptance": true,
+    "fresh_rendered_tiles": 589,
+    "runtime_galleries_passed": 51,
+    "runtime_galleries_failed": 0
   }
 }
