@@ -35,10 +35,10 @@
   ],
   "bluemap": {
     "api_commit": "285c9a60eff3ac2b0cab308ce1058d1565be0971",
-    "commit": "9be321df995a1103808621d529eb72773e719d4d",
+    "commit": "7e07f4e74ec1e92a6ead9aa1e66054af3e133aac",
     "license": "MIT",
     "redistributed": false,
-    "version": "5.22-agent.backport-5.22-mc1.21.1-2"
+    "version": "5.22-feature.backport-5.23-stateless-java-web-server-46"
   },
   "pack": {
     "commit": "c7bb230f21d14d26859d0b92548f089b3a493ad9",

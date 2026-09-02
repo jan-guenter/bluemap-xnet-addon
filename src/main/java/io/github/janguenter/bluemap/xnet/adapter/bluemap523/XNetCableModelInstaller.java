@@ -2,7 +2,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-package io.github.janguenter.bluemap.xnet.adapter.bluemap522;
+package io.github.janguenter.bluemap.xnet.adapter.bluemap523;
 
 import com.flowpowered.math.vector.Vector3f;
 import de.bluecolored.bluemap.core.map.hires.block.BlockRendererType;
