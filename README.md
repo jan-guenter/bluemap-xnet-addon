@@ -3,8 +3,8 @@
 A Java 21 BlueMap add-on for the exact `xnet-1.21-7.0.7` profile in All the Mons
 `1.2.0` / Minecraft `1.21.1`.
 
-Version `0.1.0-alpha.2` is the unpublished native BlueMap 5.23 migration
-candidate. It preserves the owner-accepted `0.1.0-alpha.1` behavior. After exact artifact
+Version `0.1.0-alpha.3` is the unpublished immutable-registration-plan
+candidate. It preserves the owner-accepted `0.1.0-alpha.2` rendering behavior. After exact artifact
 admission, it renders XNet cables and connectors from installed textures,
 facades from their persisted mimic state, and the three antenna families from
 their installed OBJ models.
@@ -15,8 +15,9 @@ Clone with `--recurse-submodules`, or initialize an existing checkout with
 `git submodule update --init --recursive -- tooling/bluemap-addon-toolkit \
 modules/bluemap-addon-adapter-api`.
 The settings preflight accepts only the committed toolkit and Adapter API
-gitlinks and rejects an uninitialized, changed, or dirty checkout. The four
-Adapter API helpers are compiled as source; its standalone JAR is not bundled.
+gitlinks and rejects an uninitialized, changed, or dirty checkout. The five
+Adapter API source files are compiled into the add-on; its standalone JAR is
+not bundled.
 
 ```bash
 gradle --no-daemon -PbluemapSourcePath=/path/to/BlueMap-at-7e07f4e7 \

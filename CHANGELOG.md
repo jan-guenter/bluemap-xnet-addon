@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-alpha.3 - 2026-09-02
+
+- Replace the repeated renderer, extension, and facade registry transaction
+  with the pinned immutable Adapter API registration plan.
+- Preserve candidate order, identity checks, failure strings, rendering,
+  resources, facade decoding, and the accepted gallery.
+
 ## 0.1.0-alpha.2 - 2026-09-02
 
 - Migrated the adapter and exact runtime admission to the tested BlueMap 5.23

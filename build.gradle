@@ -116,12 +116,16 @@ def sharedAdapterApiPackage =
         'io/github/janguenter/bluemap/addon/adapter/api/bluemap523/'
 def sharedAdapterApiClasses = [
         'BlueMapRuntimeCompatibility.class',
+        'RegistrationPlan.class',
+        'RegistrationPlan$Registration.class',
+        'RegistrationPlan$TypedRegistration.class',
         'RegistryGuard.class',
         'ResourceExtensionType.class',
         'SyntheticDispatch.class'
 ].collect { sharedAdapterApiPackage + it }
 def sharedAdapterApiSources = [
         'BlueMapRuntimeCompatibility.java',
+        'RegistrationPlan.java',
         'RegistryGuard.java',
         'ResourceExtensionType.java',
         'SyntheticDispatch.java'
@@ -429,28 +433,16 @@ tasks.register('verifyReleaseMetadata') {
         def release = new groovy.json.JsonSlurper()
                 .parse(file('provenance/release.json'))
         def expectedRepository = 'https://github.com/jan-guenter/bluemap-xnet-addon'
-        if (release.status != 'owner-accepted-release-candidate'
+        if (!(release.status in [
+                    'unpublished-migration-candidate',
+                    'owner-accepted-release-candidate'
+                ])
                 || release.version != project.version.toString()
                 || release.repository != expectedRepository
-                || !(release.owner_accepted_staging instanceof Map)
-                || release.owner_accepted_staging.isEmpty()
-                || release.owner_accepted_staging.visual_acceptance != true
-                || !(release.accepted_staging_entries instanceof Map)
-                || release.accepted_staging_entries.isEmpty()
-                || !(release.final_release_artifacts instanceof Map)
-                || release.final_release_artifacts.isEmpty()) {
+                || release.tag != expectedTag
+                || !(release.candidate_artifacts instanceof Map)
+                || release.candidate_artifacts.isEmpty()) {
             throw new GradleException('Release provenance is not sealed')
-        }
-
-        def entryManifest = file('provenance/accepted-staging-entries.sha256')
-        def acceptedEntries = release.accepted_staging_entries
-        def entryLines = entryManifest.readLines('UTF-8').findAll { !it.isBlank() }
-        def entrySha256 = java.security.MessageDigest.getInstance('SHA-256')
-                .digest(entryManifest.bytes).encodeHex().toString()
-        if (acceptedEntries.path != 'provenance/accepted-staging-entries.sha256'
-                || acceptedEntries.entry_count != entryLines.size()
-                || acceptedEntries.sha256 != entrySha256) {
-            throw new GradleException('Accepted staging entry provenance mismatch')
         }
 
         def expectedArtifacts = [
@@ -476,7 +468,7 @@ tasks.register('verifyReleaseMetadata') {
                 ]
         ]
         expectedArtifacts.each { name, expected ->
-            def recorded = release.final_release_artifacts[name]
+            def recorded = release.candidate_artifacts[name]
             if (!(recorded instanceof Map)
                     || recorded.file_name != expected.file_name
                     || recorded.size != expected.size

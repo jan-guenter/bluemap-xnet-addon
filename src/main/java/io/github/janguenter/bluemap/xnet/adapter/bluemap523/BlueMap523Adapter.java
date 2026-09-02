@@ -10,8 +10,9 @@ import de.bluecolored.bluemap.core.map.hires.block.BlockRenderer;
 import de.bluecolored.bluemap.core.map.hires.block.BlockRendererType;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePack;
 import de.bluecolored.bluemap.core.util.Key;
+import de.bluecolored.bluemap.core.util.Registry;
 import de.bluecolored.bluemap.core.world.mca.blockentity.BlockEntityType;
-import io.github.janguenter.bluemap.addon.adapter.api.bluemap523.RegistryGuard;
+import io.github.janguenter.bluemap.addon.adapter.api.bluemap523.RegistrationPlan;
 import io.github.janguenter.bluemap.addon.adapter.api.bluemap523.ResourceExtensionType;
 import io.github.janguenter.bluemap.xnet.activation.AddonRuntime;
 
@@ -36,19 +37,31 @@ public final class BlueMap523Adapter {
 
     /** Registers only the safe exact-profile probe in the generated seed. */
     public static synchronized boolean install() {
-        if (!RegistryGuard.canRegister(BlockRendererType.REGISTRY, RENDERER)
-                || !RegistryGuard.canRegister(ResourcePack.Extension.REGISTRY, EXTENSION)
-                || !RegistryGuard.canRegister(BlockEntityType.REGISTRY, FACADE)) {
+        RegistrationPlan plan = registrationPlan(
+                BlockRendererType.REGISTRY,
+                ResourcePack.Extension.REGISTRY,
+                BlockEntityType.REGISTRY
+        );
+        if (!plan.canApply()) {
             RUNTIME.fail("registry-collision");
             return false;
         }
-        if (!RegistryGuard.register(BlockRendererType.REGISTRY, RENDERER)
-                || !RegistryGuard.register(ResourcePack.Extension.REGISTRY, EXTENSION)
-                || !RegistryGuard.register(BlockEntityType.REGISTRY, FACADE)) {
+        if (!plan.apply()) {
             RUNTIME.fail("registry-registration-failed");
             return false;
         }
         return true;
+    }
+
+    static RegistrationPlan registrationPlan(
+            Registry<BlockRendererType> rendererRegistry,
+            Registry<ResourcePack.Extension<?>> extensionRegistry,
+            Registry<BlockEntityType> blockEntityRegistry
+    ) {
+        return RegistrationPlan.empty()
+                .add(rendererRegistry, RENDERER)
+                .add(extensionRegistry, EXTENSION)
+                .add(blockEntityRegistry, FACADE);
     }
 
     private static BlockRenderer createRenderer(
